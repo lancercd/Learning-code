@@ -1,0 +1,128 @@
+limits.h   ->  INT_MAX(最大的int数)
+stdlob.h   ->  exit(0)直接结束整个程序
+
+time.h     ->  {//运行时间计算
+    clock_t startTime,endTime;
+    startTime = clock();
+    endTime = clock();
+
+    cout << "The run time is: " <<(double)(endTime - startTime) << endl;
+}
+
+
+//c++ 输出格式化
+#include "iomanip"
+cout << setiosflags(ios::fixed) << setprecision(3) << 4.0/3.0 * p * r * r * r << endl;
+//会四舍五入  但是不重要  最好double类型
+//cout << setiosflags(ios::fixed) << setprecision(3) << 4.9999 << endl; ---> 5.000
+4.9999  --> 5.000
+4.9655  --> 4.966
+
+//快速判断是否为  [质数][素数]  ps: 质数 的别名叫 素数
+#include "cmath"
+int is_pri(int num)
+{
+	if (num < 2) return 0;
+	if (num == 3 || num == 2) return 1;
+	if (num % 6 != 1 && num % 6 != 5) return 0;
+	int sq = (int)sqrt(num);
+	for (int i = 5; i <= sq; i += 6) {
+		if (num % i == 0 || num % (i + 2) == 0) return 0;
+	}
+	return 1;
+}
+
+
+
+
+
+在ACM里，经常出现 数据集超大造成 cin TLE的情况。这时候大部分人（包括原来我也是）认为这是cin的效率不及scanf的错，甚至还上升到C语言和C++语言的执行效率层面的无聊争论。其 实像上文所说，这只是C++为了兼容而采取的保守措施。我们可以在IO之前将stdio解除绑定，这样做了之后要注意不要同时混用cout和printf 之类。
+
+在默认的情况下cin绑定的是cout，每次执行 << 操作符的时候都要调用flush，这样会增加IO负担。可以通过tie(0)（0表示NULL）来解除cin与cout的绑定，进一步加快执行效率。
+
+如下所示：
+
+#include <iostream>
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0);
+    cout.tie(0);
+    // IO
+}
+
+
+求最大公约数  函数
+int __gcd(int , int);
+
+__gcd(10, 15);     //   5
+__gcd(6, 10);      //   2
+
+
+部分排序   函数
+nth_element(arr, arr + k-1, arr + end);
+nth_element(arr, arr + k-1, arr + end, cmp);
+
+
+
+
+set 自定义比较函数
+#include "iostream"
+#include "algorithm"
+#include "set"
+
+using namespace std;
+
+int m, k, x;
+struct cmp {
+    bool operator () (const int& u, const int& v) const {
+        if (abs(u - v) <= k) return false;
+        return u < v;
+    }
+};
+
+set<int, cmp> se;
+
+int main(int argc, char const* argv[]) {
+    ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    char order[7]; cin >> m >> k;
+    while (m--) {
+        cin >> order >> x;
+        if (order[0] == 'a') se.insert(x);
+
+        else if (order[0] == 'd') se.erase(x);
+        else if (order[0] == 'q') (se.find(x) != se.end()) ? cout << "Yes" << endl : cout << "No" << endl;
+    }
+    return 0;
+}
+
+测试样例
+6 3
+add 10
+query 10
+add 5
+query 5
+del 7
+query 8
+地址
+https://ac.nowcoder.com/acm/problem/17508
+
+
+
+
+c++  向上取整 向下取整
+#include "cmath"
+ceil()向上取整     floor()向下取整
+！！！！！！！特别注意！！！！！！
+如果  ceil(int/int) || floor(int/int)   请一定要把  int转double  不然这两个函数  无效
+因为这个问题   我debug了1个小时都没找到
+还是通过和别人的代码逻辑相比较  才发现
+{
+    int count_time = 0, std_dry = a * max_time;
+    for (int i=0; i < n; ++i) {
+        if (arr[i] > std_dry) {
+        count_time += ceil((arr[i] - std_dry) / b); <---------  这个b要强转double
+        }
+    }
+    return count_time <= max_time;
+}
