@@ -49,9 +49,7 @@ int main() {
                 else if(ch == '.'){arr[i][j] = 1;}
             }
         }
-        dfs(start_x, start_y)? cout << "yes" << endl: cout << "No" << endl;
+        dfs(start_x, start_y)? printf("Yes\n"): printf("No\n");
     }
-
-
     return 0;
 }
