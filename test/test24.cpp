@@ -1,4 +1,3 @@
-
 #include "iostream"
 #include "algorithm"
 #include "queue"
@@ -8,7 +7,7 @@ using namespace std;
 
 const int MAXN = 5e2 + 5;
 int arr[MAXN][MAXN],vis[MAXN][MAXN];
-int dx[] = {1, -1, 0, 0}, dy[] = {0,  0, 1, -1};
+int _dx[] = {1, -1, 0, 0}, _dy[] = {0,  0, 1, -1};
 int n,m,end_x,end_y;
 
 
@@ -18,34 +17,36 @@ bool dfs(int _x, int _y){
     while(!que.empty())
     {
         pair<int, int> now = que.front(); que.pop();
+        int x = now.first, y = now.second;
         for(int i=0; i<4; ++i)
         {
-            int xx = now.first + dx[i], yy = now.second + dy[i];
-            if(xx < 0 || yy < 0 || xx >= m || yy >= n) continue;
-            if(arr[xx][yy] == 0) continue;
-            if(vis[xx][yy] != 0) continue;
-            if(end_x == xx && end_y == yy){ return 1; }
+            int dx = x + _dx[i];
+            int dy = y + _dy[i];
+            if(dx < 0 || dy < 0 || dx >= m || dy >= n) continue;
+            if(arr[dx][dy] == 0) continue;
+            if(vis[dx][dy] != 0) continue;
+            if(end_x == dx && end_y == dy){ return 1; }
 
-            vis[xx][xx] = vis[now.first][now.second] + 1;
-            que.push({xx, yy});
+            vis[dx][dy] = vis[x][y] + 1;
+            que.push({dx, dy});
         }
     }
     return 0;
 }
 int main() {
-    int i,j, start_x,start_y;char ch;
-    while(cin >> n >> m)
+    int start_x,start_y;char ch;
+    while(scanf("%d%d", &n, &m) != EOF)
     {
-        // fill(arr[0], arr[0] + (m+1) * (n+1), 0);
         memset(arr, 0, sizeof(arr));
-        for(i=0; i<n; ++i)
+        memset(vis, 0, sizeof(vis));
+        for(int i=0; i<n; ++i)
         {
-            for(j=0; j<m; ++j)
+            for(int j=0; j<m; ++j)
             {
-                cin >> ch;
+                scanf(" %c", &ch);
                      if(ch == 'S'){start_x = i; start_y = j; arr[i][j] = 1;}
-                else if(ch == '.'){arr[i][j] = 1;}
                 else if(ch == 'E'){arr[i][j] = 1; end_x = i;end_y = j;}
+                else if(ch == '.'){arr[i][j] = 1;}
             }
         }
         dfs(start_x, start_y)? cout << "yes" << endl: cout << "No" << endl;
