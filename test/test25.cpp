@@ -44,17 +44,17 @@ int main()
         for (int i = 0; i < N; i++)
             for (int j = 0; j < M; j++)
             {
-                char c;
-                scanf(" %c", &c);
-                if (c == 'S') {
+                char ch;
+                scanf(" %c", &ch);
+                if (ch == 'S') {
                     start_x = i; start_y = j;
                     arr[i][j] = 1;
                 }
-                if (c == 'E') {
+                if (ch == 'E') {
                     end_x = i;end_y = j;
                     arr[i][j] = 1;
                 }
-                if (c == '.')  arr[i][j] = 1;
+                if (ch == '.')  arr[i][j] = 1;
             }
 
         if (bfs(start_x, start_y)) printf("Yes\n");
