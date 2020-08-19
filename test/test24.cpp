@@ -12,7 +12,7 @@ int N,M,end_x,end_y;
 
 
 bool dfs(int _x, int _y){
-    queue<pair<int, int> > que;
+    queue<pair<int, int> > que; vis[_x][_y] = 1;
     que.push({_x,_y});
     while(!que.empty())
     {
@@ -34,13 +34,15 @@ bool dfs(int _x, int _y){
     return 0;
 }
 int main() {
+    register int i=0,j=0;
     int start_x,start_y;char ch;
     while(scanf("%d%d", &N, &M) != EOF)
     {
         memset(arr, 0, sizeof(arr));
         memset(vis, 0, sizeof(vis));
-        for(int i=0; i<N; ++i)
-            for(int j=0; j<M; ++j)
+        for(i=0; i<N; ++i)
+        {
+            for(j=0; j<M; ++j)
             {
                 scanf(" %c", &ch);
                 if(ch == 'S'){
@@ -53,9 +55,8 @@ int main() {
                 }
                 if(ch == '.') arr[i][j] = 1;
             }
-
-        if (dfs(start_x, start_y)) printf("Yes\n");
-        else printf("No\n");
+        }
+        (dfs(start_x, start_y))? printf("Yes\n"):printf("No\n");
     }
     return 0;
 }
