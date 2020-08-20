@@ -1,26 +1,21 @@
 #include "iostream"
 #include "algorithm"
 using namespace std;
+const int MAXN = 5e3 + 5;
+pair<int , int > arr[MAXN];
+int N,M, a, b;
+unsigned long long price = 0;
 
-class Solution {
-public:
-    int climbStairs(int n) {
-        n -= 1;
-        unsigned long long arr[2] = {1,2}, count = 0;
-        if(n < 2) return arr[n];
-        while(n > 1){
-            count = arr[1] + arr[0];
-            arr[0] = arr[1];
-            arr[1] = count;
-
-            --n;
-        }
-        return count;
-    }
-
-};
 int main(int argc, char const *argv[]) {
-    Solution * a = new Solution;
-    cout << a->climbStairs(4) << endl;
+    cin >> N >> M;
+    for(int i=0; i<M; ++i) {cin >> a >> b;  arr[i].first = a;  arr[i].second = b;}
+    sort(arr, arr + M);
+
+    for(int i=0; i<M; ++i)
+    {
+        if(arr[i].second > N){ price += N * arr[i].first; break; }
+        else { price += arr[i].second * arr[i].first; N -= arr[i].second;}
+    }
+    cout << price;
     return 0;
 }
