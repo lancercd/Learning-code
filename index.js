@@ -20,8 +20,6 @@ const MarkConfig_ = {
     color: {
         backgroundColor: ['#e67e22', 'rgba(231, 76, 60,1.0)', 'rgba(52, 152, 219,1.0)'],
     },
-
-
 };
 class MarkNowCoder_{
     constructor(){
