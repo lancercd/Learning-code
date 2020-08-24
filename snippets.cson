@@ -1,0 +1,97 @@
+'.source.cpp':
+    # 数据类型
+    'algo-ll':
+        'prefix':'ll'
+        'body':'typedef long long ll;'
+
+    'algo-ull':
+        'prefix':'ull'
+        'body':'typedef unsigned long long ull;'
+
+    'algo-pair':
+        'prefix':'pair'
+        'body':'pair<${1:int},${1:int}> ${2}'
+
+    # 功能
+
+    'algo-init':
+       'prefix':'init'
+       'body': '''
+        #include "iostream"
+        #include "algorithm"
+        $2
+        using namespace std;
+        $3
+        int main() {
+            $1$4
+            return 0;
+        }
+        '''
+    'algo-for':
+        'prefix':'for'
+        'body':"""
+        for(int ${1:i} = 0;  ${1:i} < ${2:N}; ++${1:i}){
+            ${3}
+        }
+        """
+    'algo-for-for':
+        'prefix':'ff'
+        'body':"""
+        for(int i = 0;  i < ${1:N}; ++i){
+            for(int j = 0;  j < ${2:M}; ++j){
+                ${3}
+            }
+        }
+        """
+
+    'algo-sync':
+        'prefix':'js'
+        'body':'std::ios::sync_with_stdio(false);std::cin.tie(0);cout.tie(0);'
+
+    'algo-file-bind':
+        'prefix':'file'
+        'body':'freopen("in.txt", "r", stdin); freopen("out.txt", "w", stdout);'
+
+    'algo-struct':
+        'prefix':'struct'
+        'body':'struct node{${1:int} ${2:x},${3:y};}Node;'
+
+
+    # 函数 func
+    'algo-func-prime':
+        'prefix':'isPrime'
+        'body':"""
+        int is_prime(int num)
+        {
+        	if (num < 2) return 0;
+        	if (num == 3 || num == 2) return 1;
+        	if (num % 6 != 1 && num % 6 != 5) return 0;
+        	int sq = (int)sqrt(num);
+        	for (int i = 5; i <= sq; i += 6) {
+        		if (num % i == 0 || num % (i + 2) == 0) return 0;
+        	}
+        	return 1;
+        }
+        """
+    'algo-func-read':
+        'prefix':'read'
+        'body':"""
+        inline ll read()
+        {
+            ll x = 0, f = 1; char ch = getchar();
+            while (ch < '0' || ch > '9'){if (ch == '-')f = -1;ch = getchar();}
+            while (ch >= '0' && ch <= '9'){x = (x << 1) + (x << 3) + (ch ^ 48);ch = getchar();}
+            return x * f;
+        }
+        """
+
+    'algo-func-tread':
+        'prefix':'tread'
+        'body':"""
+        template<class T>inline void read(T &res)
+        {
+            char c;T flag=1;
+            while((c=getchar())<'0'||c>'9')if(c=='-')flag=-1;res=c-'0';
+            while((c=getchar())>='0'&&c<='9')res=res*10+c-'0';res*=flag;
+        }
+        """
