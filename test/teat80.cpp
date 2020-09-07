@@ -1,5 +1,6 @@
 #include "iostream"
 #include "algorithm"
+#include "cstdio"
 
 using namespace std;
 // #define MAXBIT 520
@@ -28,7 +29,7 @@ typedef struct BigUnsignedInt {
      */
     int get_length(char target[]) {     //<----------------这个函数有问题
         int length = 0;
-        while (target[length] != '\0') ++length;
+        while (target[length] != '\0') ++length;   // <--------这里有问题  保存0时  0对应 \0
         return length;
     }
 
@@ -171,34 +172,73 @@ typedef struct BigUnsignedInt {
      * @return self
      */
     BigUnsignedInt operator + (const BigUnsignedInt right) {
-        int len = right.length; if (len < this->length) len = this->length; //选取长度最大的  length最大的
-        for (int i = 0; i < len; ++i) {   //相同length位 相加     不会超出char(-128 ~ 127)  最大为 9 + 9 = 18
-            this->num[i] += right.num[i];
+        BigUnsignedInt tmp = *this;                  //零时变量
+        int len = right.length; if (len < tmp.length) len = tmp.length; //选取长度最大的  length最大的
+        for (int i = 0; i < len; ++i) {             //相同length位 相加     不会超出char(-128 ~ 127)  最大为 9 + 9 = 18
+            tmp.num[i] += right.num[i];
         }
-        // this->length = len;
-        int current = 0, pre = 0;  //current: 当前在哪一位   pre:进多少
-        while (current < len) { //跳出循环时  current == len
-            this->num[current] += pre;  //当前位加上一位进上来的
-            if (this->num[current] < 10) { //如果没有超出10  则不用进位  pre = 0; continue;
+        // tmp.length = len;
+        int current = 0, pre = 0;                   //current: 当前在哪一位   pre:进多少
+        while (current < len) {                     //跳出循环时  current == len
+            tmp.num[current] += pre;                //当前位加上一位进上来的
+            if (tmp.num[current] < 10) {            //如果没有超出10  则不用进位  pre = 0; continue;
                 ++current;
                 pre = 0;
                 continue;
             }
-            pre = this->num[current] / 10; //提取 需要进位的数
-            this->num[current] %= 10;      //保存当前 个位
+            pre = tmp.num[current] / 10;            //提取 需要进位的数
+            tmp.num[current] %= 10;                 //保存当前 个位
 
             ++current;
-            if (MAXBIT == current) {  //检测是否超出最大位数   超出了请修改 MAXBIT
+            if (MAXBIT == current) {                //检测是否超出最大位数   超出了请修改 MAXBIT
                 std::cout << "***** BigUnsignedInt length overflow !!! *****" << std::endl;
                 break;
             }
         }
 
-        if (pre != 0 && MAXBIT > current) {  //检测len位是否还需要进位  (在不超出的情况下)
+        if (pre != 0 && MAXBIT > current) {         //检测len位是否还需要进位  (在不超出的情况下)
+            tmp.num[current] = pre;
+            ++current;
+        }
+        tmp.length = current;                       //修改为新的length长度
+
+        return tmp;
+    }
+
+    /**
+     * 与self类型相加
+     * @param  right self 相加的对象
+     * @return self
+     */
+    BigUnsignedInt operator += (const BigUnsignedInt right) {
+        int len = right.length; if (len < this->length) len = this->length; //选取长度最大的  length最大的
+        for (int i = 0; i < len; ++i) {             //相同length位 相加     不会超出char(-128 ~ 127)  最大为 9 + 9 = 18
+            this->num[i] += right.num[i];
+        }
+        // this->length = len;
+        int current = 0, pre = 0;                   //current: 当前在哪一位   pre:进多少
+        while (current < len) {                     //跳出循环时  current == len
+            this->num[current] += pre;              //当前位加上一位进上来的
+            if (this->num[current] < 10) {          //如果没有超出10  则不用进位  pre = 0; continue;
+                ++current;
+                pre = 0;
+                continue;
+            }
+            pre = this->num[current] / 10;          //提取 需要进位的数
+            this->num[current] %= 10;               //保存当前 个位
+
+            ++current;
+            if (MAXBIT == current) {                //检测是否超出最大位数   超出了请修改 MAXBIT
+                std::cout << "***** BigUnsignedInt length overflow !!! *****" << std::endl;
+                break;
+            }
+        }
+
+        if (pre != 0 && MAXBIT > current) {         //检测len位是否还需要进位  (在不超出的情况下)
             this->num[current] = pre;
             ++current;
         }
-        this->length = current; //修改为新的length长度
+        this->length = current;                     //修改为新的length长度
 
         return *this;
     }
@@ -236,7 +276,7 @@ typedef struct BigUnsignedInt {
 int M, N, my_time;
 BigUnsignedInt arr[4];
 int main() {
-    cin >> M >> N; my_time = N - M + 1;
+    cin >> N;M = 1; my_time = N - M + 1;
     arr[0].length = 0;arr[0].num[0] = 0;
     arr[1].length = 1;arr[1].num[0] = 1;
     arr[2].length = 1;arr[2].num[0] = 1;
@@ -249,7 +289,8 @@ int main() {
     {
         arr[1] = arr[2];
         arr[2] = arr[3];
-        arr[3] = arr[2] + arr[1];   //有错误   -->  相加过程中  arr[2] 值改变了   变成了 arr[2] = arr[2] + arr[1]
+        // arr[3] += arr[1];
+        arr[3] = arr[3] + arr[1];
     }
     cout << arr[3] << endl;
 
