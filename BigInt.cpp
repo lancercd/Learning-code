@@ -5,7 +5,7 @@
 
 using namespace std;
 // #define MAXBIT 520
-const int MAXBIT = 3;
+const int MAXBIT = 520;
 
 /**
  * Author       lancercd 1311282756@qq.com
@@ -39,12 +39,20 @@ typedef struct BigUnsignedInt {
     int cmp_length(char target[]);
 
     /**
-     * 比较this是否与目标数相等
+     * 比较否与目标数相等
      * @param  target char[] || self 被比较数 或 自身对象
      * @return bool
      */
     bool is_equal(char target[]);
     bool is_equal(const BigUnsignedInt target);
+
+
+    /**
+     * 相加
+     * @param current 当前的数
+     * @param target  需要相加的数
+     */
+    void plus(BigUnsignedInt& current, const BigUnsignedInt target);
 
 
     /**
@@ -71,17 +79,11 @@ typedef struct BigUnsignedInt {
     bool operator > (const int num);
 
     /**
-     * 与int类型做等于比较
-     * @param  num int 比较数
+     * 做等于比较
+     * @param  int self 比较数
      * @return bool
      */
     bool operator == (const int num);
-
-    /**
-     * 与self类型做等于比较
-     * @param  right self 比较的对象
-     * @return bool
-     */
     bool operator == (const BigUnsignedInt right);
 
     /**
@@ -152,6 +154,35 @@ bool BigUnsignedInt::is_equal(const BigUnsignedInt target) {
     }
     return 1;
 }
+void plus(BigUnsignedInt& current, const BigUnsignedInt target){
+    int len = target.length; if (len < current.length) len = current.length; //选取长度最大的  length最大的
+    for (int i = 0; i < len; ++i) {             //相同length位 相加     不会超出char(-128 ~ 127)  最大为 9 + 9 = 18
+        current.num[i] += target.num[i];
+    }
+    int index = 0, pre = 0;                   //index: 当前在哪一位   pre:进多少
+    while (index < len) {                     //跳出循环时  index == len
+        current.num[index] += pre;              //当前位加上一位进上来的
+        if (current.num[index] < 10) {          //如果没有超出10  则不用进位  pre = 0; continue;
+            ++index;
+            pre = 0;
+            continue;
+        }
+        pre = current.num[index] / 10;          //提取 需要进位的数
+        current.num[index] %= 10;               //保存当前 个位
+
+        ++index;
+        if (MAXBIT == index) {                //检测是否超出最大位数   超出了请修改 MAXBIT
+            std::cout << "***** BigUnsignedInt length overflow !!! *****" << std::endl;
+            break;
+        }
+    }
+
+    if (pre != 0 && MAXBIT > index) {         //检测len位是否还需要进位  (在不超出的情况下)
+        current.num[index] = pre;
+        ++index;
+    }
+    current.length = index;                     //修改为新的length长度
+}
 void BigUnsignedInt::num_to_char(char str[], int& len, int target_num) {
     sprintf(str, "%d", target_num);
     len = 0;
@@ -208,69 +239,13 @@ BigUnsignedInt BigUnsignedInt::operator = (const BigUnsignedInt right) {
     return *this;
 }
 BigUnsignedInt BigUnsignedInt::operator + (const BigUnsignedInt right) {
-    BigUnsignedInt tmp = *this;                  //零时变量
-    int len = right.length; if (len < tmp.length) len = tmp.length; //选取长度最大的  length最大的
-    for (int i = 0; i < len; ++i) {             //相同length位 相加     不会超出char(-128 ~ 127)  最大为 9 + 9 = 18
-        tmp.num[i] += right.num[i];
-    }
-    // tmp.length = len;
-    int current = 0, pre = 0;                   //current: 当前在哪一位   pre:进多少
-    while (current < len) {                     //跳出循环时  current == len
-        tmp.num[current] += pre;                //当前位加上一位进上来的
-        if (tmp.num[current] < 10) {            //如果没有超出10  则不用进位  pre = 0; continue;
-            ++current;
-            pre = 0;
-            continue;
-        }
-        pre = tmp.num[current] / 10;            //提取 需要进位的数
-        tmp.num[current] %= 10;                 //保存当前 个位
-
-        ++current;
-        if (MAXBIT == current) {                //检测是否超出最大位数   超出了请修改 MAXBIT
-            std::cout << "***** BigUnsignedInt length overflow !!! *****" << std::endl;
-            break;
-        }
-    }
-
-    if (pre != 0 && MAXBIT > current) {         //检测len位是否还需要进位  (在不超出的情况下)
-        tmp.num[current] = pre;
-        ++current;
-    }
-    tmp.length = current;                       //修改为新的length长度
-
+    BigUnsignedInt tmp = *this;
+    this->plus(tmp, right);
     return tmp;
 }
 
 BigUnsignedInt BigUnsignedInt::operator += (const BigUnsignedInt right) {
-    int len = right.length; if (len < this->length) len = this->length; //选取长度最大的  length最大的
-    for (int i = 0; i < len; ++i) {             //相同length位 相加     不会超出char(-128 ~ 127)  最大为 9 + 9 = 18
-        this->num[i] += right.num[i];
-    }
-    // this->length = len;
-    int current = 0, pre = 0;                   //current: 当前在哪一位   pre:进多少
-    while (current < len) {                     //跳出循环时  current == len
-        this->num[current] += pre;              //当前位加上一位进上来的
-        if (this->num[current] < 10) {          //如果没有超出10  则不用进位  pre = 0; continue;
-            ++current;
-            pre = 0;
-            continue;
-        }
-        pre = this->num[current] / 10;          //提取 需要进位的数
-        this->num[current] %= 10;               //保存当前 个位
-
-        ++current;
-        if (MAXBIT == current) {                //检测是否超出最大位数   超出了请修改 MAXBIT
-            std::cout << "***** BigUnsignedInt length overflow !!! *****" << std::endl;
-            break;
-        }
-    }
-
-    if (pre != 0 && MAXBIT > current) {         //检测len位是否还需要进位  (在不超出的情况下)
-        this->num[current] = pre;
-        ++current;
-    }
-    this->length = current;                     //修改为新的length长度
-
+    this->plus(*this, right);
     return *this;
 }
 
@@ -288,7 +263,6 @@ istream& operator >> (istream&, BigUnsignedInt& self) {
     while (num[length] != '\0') ++length;
     int i = 0, j = length - 1;
     while (i < length) {
-        //if(num[i] != '\0') self.num[i] = num[i] - '0';
         self.num[j] = num[i] - '0';
         ++i,--j;
         if (i == MAXBIT) {
@@ -308,10 +282,14 @@ istream& operator >> (istream&, BigUnsignedInt& self) {
 BigUnsignedInt a, b;
 
 int main() {
-    // cin >> a >> b;
-    // cout << a + b << endl;
-    cin >> a;
-    cout << a.get_length(a.num) << endl;
+    cin >> a >> b;
+    cout << "a + b = " << a + b << endl;
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    a += b;
+    cout << "a += b " << a << endl;
+    // cin >> a;
+    // cout << a.get_length(a.num) << endl;
 
     return 0;
 }
