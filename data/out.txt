@@ -1,11 +1,26 @@
-10
-1 1 1 1 1 1 1 1 1 2 
-1 1 1 1 1 1 1 1 2 1 
-1 1 1 1 1 1 1 2 1 1 
-1 1 1 1 1 1 2 1 1 1 
-1 1 1 1 1 2 1 1 1 1 
-1 1 1 1 2 1 1 1 1 1 
-1 1 1 2 1 1 1 1 1 1 
-1 1 2 1 1 1 1 1 1 1 
-1 2 1 1 1 1 1 1 1 1 
-2 1 1 1 1 1 1 1 1 1 
+   all_water:286	 all_food:266	
+1 -> 2 -> 3 -> 2 -> 3 -> 2 -> 4
+>_ pos0 water:0 food:0
+>_ pos2 water:98 food:98
+>_ pos2 water:68 food:60
+>_ pos2 water:182 food:166
+
+
+   all_water:214	 all_food:194	
+1 -> 2 -> 3 -> 2 -> 4
+>_ pos0 water:0 food:0
+>_ pos2 water:98 food:98
+>_ pos2 water:68 food:60
+
+
+   all_water:156	 all_food:144	
+1 -> 2 -> 4
+>_ pos0 water:0 food:0
+>_ pos2 water:98 food:98
+
+
+   all_water:42	 all_food:38	
+1 -> 4
+>_ pos0 water:0 food:0
+
+
