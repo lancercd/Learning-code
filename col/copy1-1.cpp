@@ -74,7 +74,7 @@ std::vector< std::vector< std::pair<int, std::pair<int, int> > > > save_pre_used
 std::vector< std::vector<int > > work_day_info;                                         //每个方案对应的 工作了多少天
 std::vector< int > work_days_array;                                                     //每个方案对应的 工作的具体日期
 std::vector< std::pair<int, int> > Moneys_;                                              //每个方案对应的 钱 {money, index}
-std::vector< int > save_validate_money;
+std::vector< std::pair<int, int> > save_validate_money;
 
 // std::pair<int, int> get_begin_resources(){
 //
@@ -373,28 +373,61 @@ void dfs(int index, int day_cnt, int cur_pos, int way[],
 
 }
 
-// int validate(int water, int food){
-//     ui len = Moneys_.size();
-//     for (ui index = 0; index < len; ++index)
-//     {
-//
-//
-//     }
-//     return 0;
-// }
-//
-// void pre_validate(){
-//     int water = MAX_WEIGHT / WATER_WEIGHT, food = 0;
-//
-//     while(water){
-//         save_validate_money.push_back(validate(water, food));
-//         --water;
-//         food = (MAX_WEIGHT - water * WATER_WEIGHT) / FOOD_WEIGHT;
-//     }
-//
-//     sort(save_validate_money.begin(), save_validate_money.end());
-//
-// }
+bool weight_validate(int water, int food){
+    if((water * WATER_WEIGHT + food * FOOD_WEIGHT) > MAX_WEIGHT) return false;
+    return true;
+}
+int buy(int water, int food, int cur_money){
+    cur_money -= water * WATER_PRICE + food * FOOD_PRICE;
+    return cur_money;
+}
+
+int validate(int water, int food, int index){
+    if(!weight_validate(water, food)) return 0;
+    int money = INIT_MONEY;
+    money = buy(water, food, money);
+    
+    if(money < 0) return 0;
+    return 0;
+}
+bool cmp(std::pair<int, int>a, std::pair<int, int> b){
+    if(a.first > b.first) return true;
+    else return false;
+}
+void pre_validate(int index){
+    int water = MAX_WEIGHT / WATER_WEIGHT, food = 0;
+    std::vector<std::pair<int, int>> tmp_arr;
+    while(water){
+        int tmp_money = validate(water, food, index);
+        if(tmp_money != 0) tmp_arr.push_back({tmp_money, index});
+
+        --water;
+        food = (MAX_WEIGHT - water * WATER_WEIGHT) / FOOD_WEIGHT;
+    }
+    if(tmp_arr.size() > 0){
+        sort(tmp_arr.begin(), tmp_arr.end(), cmp);
+
+        save_validate_money.push_back(tmp_arr[0]);
+    }
+
+
+}
+void show_validate_result(){
+    for(ui i=0; i<save_validate_money.size(); ++i)
+    {
+        // 输出第0个
+        // if(save_validate_money[i].size() > 0){
+        //
+        // }
+    }
+}
+
+void todo_validate(){
+    for(ui i=0; i<Moneys_.size(); ++i)
+    {
+        pre_validate(Moneys_[i].second);
+    }
+}
 
 int main() {
     freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
@@ -413,7 +446,7 @@ int main() {
     dfs(0, 0, cur_pos, way, 0, 0, pre_info_len + 1, 0, work_arr, 0);
 
 
-    show_result();
+    // show_result();
     // calculate_money();
     // show_item_by_money();
     return 0;
