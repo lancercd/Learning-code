@@ -12,7 +12,7 @@ public class Constructor{
         // System.out.println(a.num);
         // Constru b = new Constru();
 
-        Constru.Inner b = new Constru().new Inner(5);
+        // Constru.Inner b = new Constru().new Inner(5);
 
 
     }
