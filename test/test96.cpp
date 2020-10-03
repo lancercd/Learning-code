@@ -1,7 +1,6 @@
 #include "iostream"
 #include "algorithm"
-// #include "utility"
-// #include "set"
+// 见test97.cpp
 
 using namespace std;
 
@@ -10,9 +9,9 @@ typedef struct Node{
     struct Node *next;
     struct Node *front;
 }Node;
+
 Node* head = new Node;
 int N, M;
-// set<pair<int, pair<bool, Node*>>> arr;
 
 Node* find(int num){
     Node * cur = head->next;
@@ -84,8 +83,7 @@ int main() {
         add(i + 1, index, is_right);
     }
     cin >> M;
-    // show();
-    // cout << " " << endl;
+
     for(int i=0; i<M; ++i)
     {
         int tmp;
