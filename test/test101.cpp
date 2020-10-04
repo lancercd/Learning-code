@@ -24,20 +24,28 @@ void build_tree(int node, int start, int end){
 }
 
 
-void tree_plus(int node, int start, int end, int val){
+void tree_plus(int node, int start, int end, int L, int R, int val){
+    if((end < L) || (start > R)) return;
+
+    if((start == end) && (start >= L) && (start <= R)){
+        tree[node] += val;
+        return;
+    }
+
+    int mid = (start + end) >> 1;
+    int left_node  = (node << 1) + 1;
+    int right_node = (node << 1) + 2;
+
+    tree_plus(left_node, start, mid, L, R, val);
+    tree_plus(right_node, mid + 1, end, L, R, val);
+    tree[node] = tree[left_node] + tree[right_node];
 
 }
 
-ll sum(int node, int start, int end, int L, int R){
-    cout << "L:" << start << "  R" << end << endl;
-    if(start == end){
-        return tree[node];
-    }
-    if((end < L) || (start > R)){
-        return 0;
-    }
+ll query(int node, int start, int end, int L, int R){
+    if(end < L || start > R) return 0;
 
-    if(L <= start && R >= end){
+    if((L <= start && R >= end) || (start == end)){
         return tree[node];
     }
 
@@ -46,10 +54,11 @@ ll sum(int node, int start, int end, int L, int R){
     int left_node  = (node << 1) + 1;
     int right_node = (node << 1) + 2;
 
-    return sum(left_node, start, mid, L, R) + sum(right_node, mid + 1, end, L, R);
 
+    int left_sum  = query(left_node, start, mid, L, R);
+    int right_sum = query(right_node, mid+1, end, L, R);
 
-    return 0;
+    return left_sum + right_sum;
 }
 
 
@@ -64,7 +73,7 @@ void show(){
 
 int main() {
     std::ios::sync_with_stdio(false);std::cin.tie(0);std::cout.tie(0);
-    freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
+    // freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
     int op, x, y, k;
     cin >> N >> M;
     for(int i=0; i<N; ++i)
@@ -72,19 +81,17 @@ int main() {
         cin >> arr[i];
     }
     build_tree(0, 0, N - 1);
-    show();
-    cout << sum(0, 0, 9, 1, N - 2) << endl;
-    // while(M--)
-    // {
-    //     cin >> op >> x >> y;
-    //     if(op == 1){
-    //         cin >> k;
-    //         tree_plus(0, x, y, k);
-    //     }else{
-    //         cout << sum(0, 0, 14, x, y) << endl;
-    //
-    //     }
-    // }
+    while(M--)
+    {
+        cin >> op >> x >> y;
+        if(op == 1){
+            cin >> k;
+            tree_plus(0, 0, N - 1, x - 1, y  -1, k);
+        }else{
+            cout << query(0, 0, N - 1, x - 1, y - 1) << endl;
+
+        }
+    }
 
     return 0;
 }
