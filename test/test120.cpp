@@ -34,8 +34,8 @@ public:
 
 
 int main() {
-    // vector<int> arr = {9, 0, 1};
-    vector<int> arr = {0,1,0,2,1,0,1,3,2,1,2,1};
+    vector<int> arr = {9, 0, 1};
+    // vector<int> arr = {0,1,0,2,1,0,1,3,2,1,2,1};
 
     Solution* solu = new Solution();
     cout << solu->trap(arr) << endl;
