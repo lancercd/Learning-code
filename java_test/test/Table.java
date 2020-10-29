@@ -24,8 +24,15 @@ public class Table{
             table[pos] = node;
         }else{
             Node endNode = table[pos];
-            while(endNode.next != null) endNode = endNode.next;
-            endNode.next = node;
+            while(endNode.next != null && !endNode.next.key.equals(node.key)) endNode = endNode.next;
+            if(endNode.next != null){
+                System.out.println("1 : key : " + endNode.next.key + " value : " + endNode.next.value);
+                endNode.next.value = node.value;
+                System.out.println("2 : key : " + endNode.next.key + " value : " + endNode.next.value);
+            }else{
+                endNode.next = node;
+            }
+
         }
     }
 
@@ -44,17 +51,19 @@ public class Table{
         return false;
     }
 
-    private int hash(int v, int length)
+    private int hash(int value, int length)
     {
-        return v&(length - 1);
+        return value&(length - 1);
     }
 
 
     public void show(){
         for(int i=0; i<table.length; ++i)
         {
-            if(table[i] != null){
-                System.out.println("key : " + table[i].key + " value : " + table[i].value);
+            Node tmp = table[i];
+            while(tmp != null){
+                System.out.println("key : " + tmp.key + " value : " + tmp.value);
+                tmp = tmp.next;
             }
         }
     }
