@@ -1,10 +1,15 @@
-3 4
-1 1
-2 2
-2 3
-3 5
-1 1
-2 2
-2 3
-1 10
-9 1000000000
+前端：
+--http://127.0.0.1/notresp/index.php （首页） 查看全部商品，搜索栏位置问题。
+--http://127.0.0.1/notresp/res.php(登录) 注册后登录有一个选择学校的框，登录后进入对应的学校页面
+notresp/Register.php（注册） 新增学校类别
+http://127.0.0.1/notresp/addshop.php （发布商品） 新增数量功能，不需要选择学校这一栏，登陆时是哪个学校，发布商品的也是那个学校。
+--http://127.0.0.1/notresp/carshop.php（购物车） 新增价格合计功能。
+http://127.0.0.1/notresp/person.php（修改个人信息） 修改个人信息 查看个人信息 查看订单。
+**http://127.0.0.1/notresp/leaveword.php?page=1 （留言墙）新增回复功能。
+后台：
+http://127.0.0.1/notresp/admin.php（后台首页） 管理员管理权限页面。
+http://127.0.0.1/notresp/spmessage.php?page=1（商品管理页面） 修改商品信息 是否同意用户发布商品
+http://127.0.0.1/notresp/adminaddshop.php（商品添加） 无修改。
+**http://127.0.0.1/notresp/addleibie.php（新增商品类别）
+http://127.0.0.1/notresp/ddmessage.php?page=1（订单管理） 订单状态，修改订单状态，电话号码，地址。
+**http://127.0.0.1/notresp/adminliuyan.php?page=1（留言管理） 删除留言 。
