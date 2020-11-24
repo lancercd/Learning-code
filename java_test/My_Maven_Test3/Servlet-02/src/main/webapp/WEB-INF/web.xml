@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1"
+         metadata-complete="true">
+
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/mybatis</param-value>
+  </context-param>
+
+
+  <servlet>
+    <servlet-name>test1</servlet-name>
+    <servlet-class>com.kuang.servelt.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test1</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>test2</servlet-name>
+    <servlet-class>com.kuang.servelt.GetServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test2</servlet-name>
+    <url-pattern>/get</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>test3</servlet-name>
+    <servlet-class>com.kuang.servelt.ServletDemo03</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test3</servlet-name>
+    <url-pattern>/url</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>red</servlet-name>
+    <servlet-class>com.kuang.servelt.ServletDemo04</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>red</servlet-name>
+    <url-pattern>/red</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>prop</servlet-name>
+    <servlet-class>com.kuang.servelt.ProP</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>prop</servlet-name>
+    <url-pattern>/prop</url-pattern>
+  </servlet-mapping>
+
+</web-app>
