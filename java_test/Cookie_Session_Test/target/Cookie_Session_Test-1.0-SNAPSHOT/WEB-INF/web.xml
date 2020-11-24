@@ -46,4 +46,25 @@
         <servlet-name>setSession</servlet-name>
         <url-pattern>/setSession</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Print</servlet-name>
+        <servlet-class>com.filter.Printer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Print</servlet-name>
+        <url-pattern>/Print</url-pattern>
+    </servlet-mapping>
+
+
+
+    <filter>
+        <filter-name>Myfilter</filter-name>
+        <filter-class>com.filter.FilterTest</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Myfilter</filter-name>
+        <url-pattern>/Print</url-pattern>
+    </filter-mapping>
 </web-app>
