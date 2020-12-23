@@ -1,0 +1,23 @@
+
+debug: false
+
+
+  #更改项目端口号
+server:
+  port: 8081
+
+
+persion:
+  name: lancercd
+  age: 20
+  hapyy: false
+  birth: 2019/11/02
+  maps: {K1: v1, K2: v2}
+  lists:
+    - code
+    - music
+    - girl
+
+  dog:
+    name: 旺财
+    age: 10

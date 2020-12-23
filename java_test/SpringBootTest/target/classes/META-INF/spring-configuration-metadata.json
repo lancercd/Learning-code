@@ -1,0 +1,47 @@
+{
+  "groups": [
+    {
+      "name": "persion",
+      "type": "com.lancercd.pojo.Persion",
+      "sourceType": "com.lancercd.pojo.Persion"
+    }
+  ],
+  "properties": [
+    {
+      "name": "persion.age",
+      "type": "java.lang.Integer",
+      "sourceType": "com.lancercd.pojo.Persion"
+    },
+    {
+      "name": "persion.brith",
+      "type": "java.util.Date",
+      "sourceType": "com.lancercd.pojo.Persion"
+    },
+    {
+      "name": "persion.dog",
+      "type": "com.lancercd.pojo.Dog",
+      "sourceType": "com.lancercd.pojo.Persion"
+    },
+    {
+      "name": "persion.happy",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.lancercd.pojo.Persion"
+    },
+    {
+      "name": "persion.lists",
+      "type": "java.util.List<java.lang.Object>",
+      "sourceType": "com.lancercd.pojo.Persion"
+    },
+    {
+      "name": "persion.maps",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "com.lancercd.pojo.Persion"
+    },
+    {
+      "name": "persion.name",
+      "type": "java.lang.String",
+      "sourceType": "com.lancercd.pojo.Persion"
+    }
+  ],
+  "hints": []
+}
