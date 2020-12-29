@@ -30,13 +30,6 @@ int main() {
         ++it;
     }
 
-    // for(auto ele : unordered){
-    //     cout << ele.first << " " << ele.second << endl;
-    // }
-    //
-    // for(auto it : order){
-    //     cout << it.first << "  " << it.first << endl;
-    // }
 
     return 0;
 }
