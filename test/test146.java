@@ -3,12 +3,31 @@ import java.util.Arrays;
 public class test146{
     public static void main(String[] args) {
         int[] arr = new int[] {5,1,2,3,7,6};
-        dobbleSort();
+        // dobbleSort();
+        selectSort(arr);
     }
 
 
+    //选择排序
+    public static void selectSort(int[] arr){
+        int len = arr.length;
+        print("ok");
+        print(arr);
+        for(int i=0; i<len - 1; ++i)
+        {
+            int index = i;
+            for(int j=i + 1; j<len; ++j)
+            {
+                if(arr[index] < arr[j]){
+                    index = j;
+                }
+            }
+            swap(arr, i, index);
+        }
+        print(arr);
+    }
 
-
+    //冒泡排序
     public static void dobbleSort(int[] arr){
         int len = arr.length;
         print(arr);
