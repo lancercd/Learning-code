@@ -5,8 +5,6 @@ import java.util.Stack;
 
 public class test152 {
 
-    public TreeNode ans;
-    public test152(){this.ans = null;}
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(3);
@@ -33,25 +31,24 @@ public class test152 {
         test152 test = new test152();
 
 
-        TreeNode node = test.lowestCommonAncestor(root, n5, n1);
+        TreeNode node = test.lowestCommonAncestor(root, n7, n4);
         System.out.println(node.val);
     }
 
+
+
+    /**
+     * 主函数
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        dfs(root, p, q);
-        return this.ans;
-    }
+        if(null == root || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
 
-    public boolean dfs(TreeNode root, TreeNode p, TreeNode q){
-        if(null == root) return false;
-        boolean lson = dfs(root.left, p, q);
-        boolean rson = dfs(root.right, p, q);
-        if((lson && rson) || ((root == p || root == q) && (lson || rson))){
-            this.ans = root;
-        }
-        return lson || rson || root == p || root == q;
+        if(null == left) return right;
+        if(null == right) return left;
+        return root;
     }
-
 
 
 
