@@ -5,14 +5,14 @@
 
 using namespace std;
 
-bool cmp(string a, string b){
+bool cmp(string a, string b) {
     int lena = a.size();
     int lenb = b.size();
-    if(lena < lenb) return true;
-    if(lena == lenb){
+    if (lena < lenb) return true;
+    if (lena == lenb) {
         int la = 0;
-        while(a[la] > b[la++]){
-            return true;
+        while (la < lena) {
+            if((a[la] - '0') < (b[la++] - '0')) return true;
         }
     }
     return false;
@@ -21,7 +21,7 @@ bool cmp(string a, string b){
 
 char str[1011];
 int main() {
-    // freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
+    freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
     vector<string> arr;
     cin >> str;
 
