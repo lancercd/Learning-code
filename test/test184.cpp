@@ -6,67 +6,53 @@ const int MAXN = 1e7 + 5;
 int arr[MAXN] = {0};
 int L, N, K;
 
-int findMaxIndex(int arr[], int len){
-    int index = 0;
-    for(int i=1; i<len; ++i){
-        if(arr[index] < arr[i]) index = i;
-    }
 
-    return index;
+//这段距离  需要填充多少次  才行
+int myDiv(int num1, int num2){
+    int ans = num1 / num2;
+    if(num1 % num2 != 0) ++ans;
+
+    return ans - 1;
 }
 
 
-void show(int arr[], int len){
-    for(int i=0; i<len; ++i)
-    {
-        cout << arr[i] << " ";
+bool check(int target){
+    if(target == 0) return false;
+    int pre = 0, current = 0;
+    int put_count = 0;
+    int div = 0;
+    while(current < N){
+        ++current;
+        div = arr[current] - arr[pre];
+        if(div > target){
+            put_count += myDiv(div, target);
+        }
+        ++pre;
+
+        if(put_count > K) return false;
     }
-    cout << endl;
+
+    return true;
 }
 
 int main(){
     // freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
     cin >> L >> N >> K;
-    int tmp = 0, pre = 0;
-    for(int i=0; i<N; ++i)
+    for(int i=0; i<N; ++i) cin >> arr[i];
+    --N;
+    int left = 0, right = arr[N], mid = 0;
+    int ans = 0;
+    while(left <= right)
     {
-        cin >> arr[i];
-        tmp = arr[i];
-        arr[i] -= pre;
-        pre = tmp;
-    }
-
-    if(0 == K){
-        cout << arr[findMaxIndex(arr, N)];
-        return 0;
-    }
-
-    int expor[K] = {0};
-    pre = 0;
-
-    for(int i=0; i<K; ++i)
-    {
-        int a = findMaxIndex(arr, N);
-        int b = findMaxIndex(expor, K);
-        if(arr[a] > expor[b]){
-            tmp = arr[a];
-            arr[a] >>= 1;
-            expor[pre++] = tmp - arr[a];
+        mid = left + ((right - left) >> 1);
+        if(check(mid)){
+            right = mid - 1;
+            ans = mid;
         }else{
-            tmp = expor[b];
-            expor[b] >>= 1;
-            expor[pre++] = tmp - expor[b];
+            left = mid + 1;
         }
     }
+    cout << ans;
 
-
-    int a = findMaxIndex(arr, N);
-    int b = findMaxIndex(expor, K);
-    cout << ((arr[a] > expor[b])? arr[a] : expor[b]);
-
-
-    // cout << endl;
-    // show(arr, N);
-    // show(expor, K);
     return 0;
 }
