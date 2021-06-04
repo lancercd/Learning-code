@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <h1>lancercd.top</h1>
+</body>
+
+<script>
+    function Color(ele){
+        this.colors = ["#1abc9c", "#3498db", "#e74c3c", "#f1c40f", "#f39c12", "#95a5a6"];
+        
+        this.run = function(){
+            setInterval(function () {
+                let i = Math.floor(Math.random() * this.colors.length);
+                console.log(i);
+                ele.style.backgroundColor = this.colors[i];
+            }.bind(this), 1000)
+        }
+    }
+
+    document.querySelector("h1").style.color = "#fff";
+    (new Color(document.querySelector("body"))).run();
+</script>
+</html>
