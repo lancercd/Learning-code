@@ -7,7 +7,7 @@ class Ve{
     cmpThis(otherThis) {
         console.log(this === otherThis);
         console.log(Object.is(this, otherThis));
-    }
+    }   
 
 }
 
