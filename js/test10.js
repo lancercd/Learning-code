@@ -14,3 +14,5 @@ console.log(str3 === str4);
 
 console.log(str1 == str3);
 console.log(str2 === str4);
+
+console.log(Object.is(str1, str2));
