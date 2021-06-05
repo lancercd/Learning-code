@@ -29,7 +29,7 @@ function copy1(target) {
     for (const [key, value] of Object.entries(target)) {
         
         // console.log(`key:${key} value:${value}`);
-        res[key] = (typeof value == 'Object')?copy(value) : value;
+        res[key] = (typeof value == 'Object')? arguments.callee(value) : value;
     }
 
     return res;
@@ -40,19 +40,15 @@ function copy1(target) {
 //不能拷贝  function   不能拷贝某些数据类型
 function copy2(target) {
     let strTarget = JSON.stringify(target, null, 2);
-    console.log(strTarget);
+    // console.log(strTarget);
     // return JSON.parse(strTarget);
 }
 
 
 let copiedData1 = copy1(data);
-// console.log(copiedData1);
+console.log(copiedData1);
 
 
 let copiedData2 = copy2(data);
-console.log(copiedData2);
-
-
-
-Object.copy(d)
+// console.log(copiedData2);
 
