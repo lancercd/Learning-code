@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test5</title>
+</head>
+<body>
+    
+    <button id="1">btn1</button>
+    <button>btn2</button>
+</body>
+
+
+<script>
+    const btns = document.querySelectorAll('button');
+    console.log(btns);
+
+
+    const filteredBtn = [].filter.call(btns, item => {
+        return item.hasAttribute('id');
+    });
+    console.log(filteredBtn);
+</script>
+</html>
