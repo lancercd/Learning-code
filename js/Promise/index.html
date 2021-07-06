@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script type="module" src="./MyPromise.js"></script>
+<script type="module">
+  import MyPromise from './MyPromise.js';
+
+
+  new Promise((res, rej) => {
+    res('Promise: okkk');
+  })
+  .then(
+    (res) => {
+        let str = '1Promise: okkk->' + res;
+       console.log(str);
+       return str;
+    },
+    (err) => {
+      let str = '1Promise: fail->' + err;
+      console.log(str);
+      return str;
+    }
+  )
+  .then(
+    (res) => {
+      let str = '2Promise: okkk->' + res;
+      console.log(str);
+      return str;
+    },
+    (err) => {
+      let str = '2Promise: fail->' + err;
+      console.log(str);
+      return str;
+    }
+  )
+
+  let pro1 = new MyPromise((n, m) => {}).then();
+  let pro2 = pro1.then();
+  console.log(pro1 == pro2, '********');
+
+  
+  new MyPromise((resolve, reject) => {
+    setTimeout(() =>{
+      console.log('inside MyPromise executor');
+      // resolve(111);
+      reject(111);
+    }, 100);
+  })
+  .then(
+    (res) => {
+    console.log('成功111');
+    return 'success 快去执行222';
+    }, () => {
+      console.log('失败111');
+      return 'fail 快去执行222';
+    }
+  )
+  .then(
+    (info) => {
+      console.log(info);
+    },
+    (info) => {
+      console.log(info);
+    }
+  );
+  console.log('ok');
+
+
+
+
+
+  // console.log(new MyPromise().#aaa(() => {console.log('????');}));
+</script>
+</html>
