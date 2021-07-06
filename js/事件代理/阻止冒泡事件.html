@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阻止冒泡事件</title>
+</head>
+<style>
+    #parent div{
+        border: 1px solid red;
+    }
+</style>
+<body>
+    <div id="warp">
+        <div id="parent">
+            <div class="child1" data-id='1'>ch1</div>
+            <div class="child2" data-id='2'>ch2</div>
+            <div class="child3" data-id='3'>ch3</div>
+        </div>
+    </div>
+</body>
+<script>
+    const parent = document.querySelector("#parent");
+    
+
+    parent.addEventListener('click', (e) => {
+        const ev = e || window.event;
+        const target = ev.target || e.srcElemet;
+        if(ev.stopPropagation){
+            ev.stopPropagation();
+        }else{
+            ev.cancleBubble = true;
+        }
+
+        console.log(target.dataset.id);
+    }, false);
+</script>
+</html>

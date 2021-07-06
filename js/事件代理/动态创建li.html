@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"  onclick="console.log('html')">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li{
+        border: 1px solid #000;
+        cursor: pointer;
+    }
+</style>
+<body onclick="console.log('body')">
+    <ul id="list-box"></ul>
+</body>
+<script>
+    const box = document.querySelector('#list-box');
+    const oFrag = document.createDocumentFragment();
+
+    for(var i=0; i<10; ++i){
+        !function(i){
+            var oLi = document.createElement('li');
+            oLi.innerText = '第' + (i + 1) + '个';
+            oLi.dataset.id = i;
+            oLi.addEventListener('click', () => {
+                console.log(i);
+            }, false);
+            oFrag.appendChild(oLi);
+        }(i)
+    }
+    box.appendChild(oFrag);
+</script>
+</html>
