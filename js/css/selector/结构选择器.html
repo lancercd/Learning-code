@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+  <style>
+
+    /* 子元素选择器   只选择自己的子代   不选择孙代。。。 */
+    main artical > h2{
+      font-weight: 100;
+      font-size: 16px;
+    }
+
+
+    /* 
+      兄弟选择器   选择同级的 
+       于h1同级的 h2都被选中
+    */
+    main artical h1~h2{
+      background-color: aqua;
+    }
+
+    /* 
+      紧挨着的下方的位置  选择同级的 
+      与h1紧挨着的下方的一个h2标签被选中
+    */
+    main artical h1+h2{
+      border: 2px solid #000;
+    }
+
+
+
+  </style>
+<body>
+<main>
+  <artical>
+    <h2>artical.h2</h2>
+    <h1>artical.h1</h1>
+    <h2>artical.h2</h2>
+    <h2>artical.h2</h2>
+    <aside>
+      <h2>artical.aside.h2</h2>
+    </aside>
+    <h2>artical.h2</h2>
+  </artical> 
+</main>
+</body>
+</html>

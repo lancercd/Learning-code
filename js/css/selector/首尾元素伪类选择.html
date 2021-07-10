@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首尾原色伪类选择</title>
+  <style>
+
+    main h2:first-child{
+      background-color: red;
+    }
+
+
+    main h2:nth-child(2n - 1){
+      color: greenyellow;
+    }
+
+    main h2:last-child{
+      background-color: blue;
+    }
+
+    main :nth-child(3){
+      color: red;
+    }
+
+    main :only-of-type{
+      border: 1px solid #000;
+      background-color: hotpink;
+    }
+
+
+  </style>
+</head>
+<body>
+  <main>
+    <h2 class="first-h2">第一个h1</h2>
+    <h2>第二个h1</h2>
+    <div>我是div</div>
+    <unique>
+      <side>里面的div</side>
+    </unique>
+    <h2>第三个h1</h2>
+    <h2>第四个h1(最后一个h1)</h2>
+    
+  </main>
+</body>
+</html>

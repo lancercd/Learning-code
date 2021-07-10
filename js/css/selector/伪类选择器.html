@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>伪类选择器</title>
+  <style>
+    a:link{
+      color: red;
+      text-decoration: none;
+    }
+    a:visited{
+      color: chartreuse;
+    }
+    a:hover{
+      color: cornflowerblue;
+    }
+    a:active{
+      color: darkmagenta;
+    }
+
+    input:focus{
+      outline: none;
+      background-color: red;
+    }
+    input:hover{
+      background-color:greenyellow;
+    }
+    input:active{
+      background-color: gold;
+    }
+  </style>
+</head>
+<body>
+  <a href="javascript:;">link</a>
+  <br/>
+  input:<input type="text">
+</body>
+</html>

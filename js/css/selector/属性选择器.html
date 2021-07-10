@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性选择器</title>
+    <style>
+        h2[title]{
+            color: red;
+        }
+
+        /* h2标签中包含了 title id的才会被选中 */
+        h2[title][id]{
+            border: 3px solid #005555;
+        }
+
+        /* h2标签中title="lancercd" */
+        h2[title="lancercd"]{
+            background-color: aqua;
+        }
+
+        /* h2标签中title以"lan"开头的 */
+        h2[title^="la"]{
+            font-size: 16px;
+            font-weight: 100;
+        }
+
+        /* h2标签中title以"a"结尾的 */
+        h2[title$="a"]{
+            /* border: 3px ; */
+            border-style: double;
+            border-color: blue;
+        }
+
+        /* h3 msg中只要包含了cer   就被选中 */
+        h3[msg*="cer"]{
+            color:blue;
+            font-size: 25px;
+        }
+
+        /* 
+            h3 msg中只要包含了lancercd单词   就被选中 
+            要么msg="lancercd"
+            要么单词前后有空格 (msg="www lancercd top")
+            反转需要他是一个单词
+        */
+        h3[msg~="lancercd"]{
+            border: 4px #341053 dotted;
+            border-style: dotted;
+        }
+
+        /* 
+        (msg="lan") 或则 以 lan- 开头
+            msg="lan"  
+            或则
+            msg^="lan-"
+        */
+        h3[msg|="lan"]{
+            border: 4px red double;
+            border-style: double;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <h2>h2[]</h2>
+        <h2 title>h2[title]</h2>
+        <h2 title id>h2[title, id]</h2>
+        <h2 title="lan">h2[title:lan]</h2>
+        <h2 title="lancercd">h2[title:lancercd]</h2>
+        <h2 title="aaa">h2[title:aaa]</h2>
+
+        <test2>
+            <h3 msg="www.lancercd.top">h3[msg="www.lancercd.top"]</h3>
+            <h3 msg="www lancercd top">h3[msg="www lancercd top"](三个单词)</h3>
+            <h3 msg="lancercd">h3[msg="lancercd"](一个单词)</h3>
+            <h3 msg="lan">h3[msg="lancercd"](一个单词)</h3>
+            <h3 msg="lan-cercd">h3[msg="lancercd"](一个单词)</h3>
+
+        </test2>
+    </main>
+</body>
+</html>
