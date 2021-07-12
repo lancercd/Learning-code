@@ -1,27 +1,41 @@
 #include "iostream"
 #include "algorithm"
-#include "set"
 #include "map"
-#include "utility"
+#include "vector"
 
 using namespace std;
 
-int T, N;
-
+map<int, vector<int>> table;
+char chars[101] = {0};
+int i = 0;
 
 int main(){
-    cin >> T;
-    map<int, string> table;
-    string str = table[2];
-    set<int> list;
-    while(T--){
-        cin >> N;
-        int tmp = 0;
-        for(int i=0; i<N; ++i) cin >> tmp;
-        list.insert(tmp);
+  freopen("../data/in.txt", "r", stdin); freopen("../data/out.txt", "w", stdout);
+    cin >> chars;
 
-        cout << list.size() << endl;
-        list.clear();
+    while(chars[i] != '\0'){
+        table[chars[i]].push_back(i);
+        ++i;
     }
+
+    i = 0;
+    while(chars[i] != '\0'){
+        vector<int> arr = table[chars[i]];
+        int len = arr.size();
+        if(len == 0){
+          ++i;
+          continue;
+        }
+        for(int j=0; j<len; ++j){
+            cout << (char)chars[i] << ":" << arr[j];
+            if(j != (len - 1)) cout << ",";
+
+        }
+        cout << endl;
+        table[chars[i]].clear();
+
+        ++i;
+    }
+
     return 0;
 }
