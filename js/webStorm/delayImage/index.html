@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片懒加载</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 900px;
+            margin: 0 auto;
+            background-color: aqua;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+
+            margin: 10px 0;
+            background-color: aliceblue;
+
+        }
+        .box div{
+            width: 400px;
+            height: 400px;
+            margin: 20px 15px;
+            background-color: antiquewhite;
+        }
+
+        .box .black{
+            background-color: aquamarine;
+        }
+        .box .image-box{
+            overflow: hidden;
+        }
+        .box .image-box img{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <div class="black"></div>
+        <div class="black"></div>
+        <div class="image-box">
+            <img src=""  data-is-load="0" data-src="https://img0.baidu.com/it/u=1514002029,2035215441&fm=26&fmt=auto&gp=0.jpg" alt="">
+        </div>
+        <div class="image-box">
+            <img src=""  data-is-load="0" data-src="https://img2.baidu.com/it/u=2102736929,2417598652&fm=26&fmt=auto&gp=0.jpg" alt="">
+        </div>
+    </div>
+    <div class="box">
+        <div class="black"></div>
+        <div class="black"></div>
+        <div class="image-box">
+            <img src="" data-is-load="0" data-src="https://img2.baidu.com/it/u=3960470193,627689163&fm=26&fmt=auto&gp=0.jpg" alt="">
+        </div>
+        <div class="image-box">
+            <img src="" data-is-load="0" data-src="https://img0.baidu.com/it/u=2151136234,3513236673&fm=26&fmt=auto&gp=0.jpg" alt="">
+        </div>
+    </div>
+    <div class="box">
+        <div class="black"></div>
+        <div class="black"></div>
+        <div class="image-box">
+            <img src=""  data-is-load="0" data-src="https://img1.baidu.com/it/u=686675228,2481849275&fm=26&fmt=auto&gp=0.jpg" alt="">
+        </div>
+        <div class="image-box">
+            <img src=""  data-is-load="0" data-src="https://img1.baidu.com/it/u=4241162085,3588743387&fm=26&fmt=auto&gp=0.jpg" alt="">
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        const box = document.querySelector('.box');
+        const images = document.querySelectorAll('img');
+        const clientHeight = window.innerHeight;
+        let timer = null;
+        document.addEventListener('scroll', () => {
+            if(timer == null){
+                timer = setTimeout(() => {
+                    images.forEach((item, index) => {
+                        if(item.dataset.isLoad !== '0') return;
+                        const imgTop = item.getBoundingClientRect().bottom;
+                        console.log(images[images.length - 1].getBoundingClientRect().top);
+                        if (imgTop < clientHeight) {
+                            item.src = item.dataset.src;
+                            item.dataset.isLoad = '1';
+                        }
+                    })
+                    clearTimeout(timer);
+                    timer = null;
+                }, 500);
+
+            }
+
+        }, false);
+    }
+</script>
+</body>
+</html>
