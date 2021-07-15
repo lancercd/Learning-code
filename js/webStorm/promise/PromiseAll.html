@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise All方法实现</title>
+</head>
+<body>
+
+</body>
+<script>
+    function all(promises){
+        return new Promise((resolve, reject) => {
+            if (!Array.isArray(promises)) {
+                return new reject(new Error("请传入数组"));
+            }
+            const len = promises.length;
+            let cnt = 0,
+                res = new Array(len);
+
+            for (let i = 0; i < len; ++i) {
+                Promise.resolve(promises[i]).then((val) => {
+                    res[i] = res;
+                    ++cnt;
+                    if(cnt >= len) return resolve(res);
+                })
+                    .catch(e => {
+                        reject(e);
+                    })
+            }
+        });
+    }
+
+
+    let promises = [];
+    promises.push(Promise.resolve('111'));
+    promises.push(Promise.resolve('22'));
+    promises.push(Promise.reject('33'));
+
+    all(promises).then(res => {
+        console.log(res);
+    })
+    .catch(e => {
+        console.log(e);
+    })
+</script>
+</html>
