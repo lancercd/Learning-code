@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  "use strict";
+  /*
+      箭头函数与普通函数的区别
+  1.箭头函数语法上比普通函数更加简洁
+  2.箭头函数没有自己的this,它里面的this是继承函数所处的上下文中的this
+  3.箭头函数中没有call/apply/bind
+  3.箭头函数中没有arguments(类数组),只能能基于形参传递参数
+  4.构造函数可以使用new生成实例， 箭头函数不可以
+* */
+
+  const obj = {
+    name: 'lancercd',
+    age: 12,
+    say: function () {
+      console.log('函数内部的this', this);
+      return () => {
+        console.log('箭头函数的this', this);
+      }
+    },
+    test: () => {
+      console.log(this);
+    }
+  }
+
+  let fn = obj.say();
+  console.dir(fn);
+  // fn().call({aaa: 'aaa'});
+
+  // new fn();
+  console.log(this);
+  obj.test();
+
+
+</script>
+</html>
