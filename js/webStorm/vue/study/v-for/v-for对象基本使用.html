@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h3>对象 v-for</h3>
+        <ul>
+            <li v-for="item in objs">{{item}}</li>
+        </ul>
+    </div>
+    <div>
+        <h3>对象 (item, key) v-for</h3>
+        <ul>
+            <li v-for="(item, key) in objs">{{ key }} --> {{item}}</li>
+        </ul>
+    </div>
+    <div>
+        <h3>对象 (item, key, index) v-for</h3>
+        <ul>
+            <li v-for="(item, key, index) in objs">{{ index }} ---> {{ key }} --> {{item}}</li>
+        </ul>
+    </div>
+
+    <div>
+        <h3>对象 {key, value} v-for</h3>
+        <span style="color: red;">好像不行</span>
+        <ul>
+            <li v-for="{key, value} in objs">{{ key }} --> {{item}}</li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            index: 0,
+            objs: {
+                name: 'lancercd',
+                age: 13,
+                hobbit: ['篮球', '足球', '乒乓球', '羽毛球']
+            }
+        }
+    });
+</script>
+</html>

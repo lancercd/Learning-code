@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>登录 切换小案例</h1>
+    <div v-if="isUserNameLogin">
+        <label for="username">用户名登录</label>
+        <input type="text" name="username" id="username" :key="1">
+    </div>
+    <div v-else>
+        <label for="email">邮箱登录</label>
+        <input type="email" name="email" id="email" :key="2">
+    </div>
+    <div>
+        <label for="pwd">密码</label>
+        <input type="password" name="pwd" id="pwd">
+    </div>
+    <div>
+        <input type="submit" name="submit" value="提交" @click.prevent="submit">
+        <input type="button" name="change" value="切换登录类型" @click="change">
+    </div>
+</div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            isUserNameLogin: true
+        },
+        methods: {
+            submit() {
+                console.log('提交');
+            },
+            change() {
+                this.isUserNameLogin = !this.isUserNameLogin;
+            }
+        }
+
+
+    });
+</script>
+</html>

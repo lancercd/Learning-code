@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in lists">name: {{item.name}} --->  price: {{item.price}}</li>
+    </ul>
+
+    <div>total: {{totalPrice}}</div>
+
+  </div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      lists: [
+        {name: 'Java开发', num: 5, price: 99.5},
+        {name: "Vue初体验", num: 2, price: 120.6},
+        {name: "大话设计模式", num: 10, price: 60}
+      ]
+    },
+    computed: {
+      totalPrice() {
+        let total = 0;
+
+        for (const item of this.lists) {
+          total += item.price;
+        }
+        return total;
+      }
+    }
+  });
+</script>
+</html>

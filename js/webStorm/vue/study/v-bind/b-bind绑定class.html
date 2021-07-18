@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .border {
+            border: 1px solid red;
+        }
+        .other{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--  对象写法  -->
+    <div :class="{red:isRed, border:isBorder}">{{ msg1 }}</div>
+    <div :class="classArray" class="other"> {{ msg2 }}</div>
+
+</div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg1: '对象写法',
+            isRed: true,
+            isBorder: true,
+
+            msg2: '数组写法',
+            classArray: ['red', 'border']
+
+        }
+    });
+</script>
+</html>

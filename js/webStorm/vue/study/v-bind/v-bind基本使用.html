@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <img v-bind:src="urls[index]" alt="">
+</div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            index: 0,
+            urls: [
+                'https://img2.baidu.com/it/u=2305629593,717909558&fm=26&fmt=auto&gp=0.jpg',
+                'https://img2.baidu.com/it/u=1794733344,2167466456&fm=26&fmt=auto&gp=0.jpg'
+            ]
+        },
+        created: function () {
+
+
+
+            let interval = setInterval(() => {
+                ++this.index;
+                if (this.index === this.urls.length) {
+                    this.index = 0;
+                }
+            }, 500);
+
+        }
+    });
+</script>
+</html>

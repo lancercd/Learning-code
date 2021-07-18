@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="item in arr">{{ item }}</li>
+    </ul>
+    <div>
+        <input type="text" v-model:value="val" />
+    </div>
+
+    <div>
+        <button @click.stop="push">push</button>
+        <button @click.stop="pop">pop</button>
+        <button @click.stop="shift">shift</button>
+        <button @click.stop="unshift">unshift</button>
+        <button @click.stop="splice">splice</button>
+        <button @click.stop="sort">sort</button>
+        <button @click.stop="reverse">reverse</button>
+    </div>
+</div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            index: 0,
+            val: '',
+            arr: [
+                'aaa',
+                'bbb',
+                'ccc',
+                'ddd',
+                'eee',
+                'fff',
+                'ggg'
+            ]
+        },
+        methods: {
+            push() {
+                if(this.val.trim() === ''){
+                    this.arr.push(Math.floor(Math.random() * 100));
+                    return;
+                }
+                this.arr.push(this.val);
+                this.val = '';
+
+            },
+            pop() {
+                this.arr.pop();
+            },
+            shift() {
+                this.arr.shift();
+            },
+            unshift() {
+                this.arr.unshift();
+            },
+            splice() {
+                console.log(this.val);
+                let args = this.val.split(',');
+                console.log(args);
+                this.arr.splice(...args);
+            },
+            sort() {
+                this.arr.sort();
+            },
+            reverse() {
+                this.arr.reverse();
+            }
+        }
+    });
+</script>
+</html>

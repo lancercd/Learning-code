@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h3>数组 v-for</h3>
+        <ul>
+            <li v-for="item in arr">{{item}}</li>
+        </ul>
+    </div>
+    <div>
+        <h3>数组 (item, index) v-for</h3>
+        <ul>
+            <li v-for="(item, index) in arr">{{ index }} --> {{item}}</li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            index: 0,
+            arr: [
+                'aaa',
+                'bbb',
+                'ccc',
+                'ddd',
+                'eee',
+                'fff',
+                'ggg'
+            ]
+        }
+    });
+</script>
+</html>
