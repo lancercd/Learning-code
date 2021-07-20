@@ -1,6 +1,16 @@
-import add from './js/aaa';
 
 require('./css/normal.css');
+require('./css/special.less');
 
 
-console.log(add(1, 3));
+import Vue from 'vue';
+import App from './vue/App'
+
+const vm = new Vue({
+    el: '#app',
+    template: '<App/>',
+    components: {
+        App
+    }
+
+});
