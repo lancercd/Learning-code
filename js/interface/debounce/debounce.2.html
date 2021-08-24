@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖2</title>
+</head>
+<body>
+  <button id="btn">按钮</button>
+  <button id="cancle">取消</button>
+</body>
+<script>
+  const btn = document.querySelector('#btn');
+  const cancle = document.querySelector('#cancle');
+
+
+  //防抖闭包
+  function debounce(func, delay, immediate){
+    let timer = null, result = null;
+
+    const handler = function () {
+      const args = arguments;
+      const context = this;
+
+      if(timer != null) clearTimeout(timer);
+
+      if (immediate === true) {
+        immediate = false;
+        result = func.apply(context, args);
+        timer = null;
+      }else{
+         timer = setTimeout(function () {
+          result = func.apply(context, args);
+        }, delay);
+      }
+     
+      
+      return result;
+    }
+
+    handler.cancle = function() {
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    return handler;
+  }
+
+  function doSomeThing(e){
+    console.log('ok');
+    console.log(this);
+    console.log(e);
+  }
+
+
+  const debounceHandler = debounce(doSomeThing, 1000, true);
+
+
+  btn.onclick = debounceHandler;
+  cancle.onclick = function () {
+    if(debounceHandler != null){
+      debounceHandler.cancle();
+    }
+  }
+
+</script>
+</html>

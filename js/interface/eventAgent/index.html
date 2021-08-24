@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件委托</title>
+  <style>
+    li{
+      border: 1px solid #000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <ul id="ul">
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <div>1111</div>
+  </ul>
+</body>
+
+<script>
+  // const oLists = document.getElementsByTagName('li');
+
+  // for(let i=0; i<oLists.length; ++i){
+  //   oLists[i].addEventListener('click', (ev) => {
+  //     const e = ev || window.event;
+  //     const target = ev.target || ev.srcElement;
+  //     console.log(target.innerText);
+  //   }, false);
+  // }
+
+
+
+  const oUl = document.querySelector('#ul');
+
+  oUl.addEventListener('click', (ev) => {
+    const e = ev || window.event;
+    const target = e.targe || e.srcElement;
+    // if(target.nodeName.toLowerCase() === 'li'){
+      const index = Array.prototype.indexOf.call(oUl.children, target);
+      console.log(oUl.childNodes);
+      console.log('index:' + index, 'innerText:' + target.innerText);
+      // console.log(target.innerText);
+    // }
+    
+
+    
+  },false);
+
+  const isForbid = true;
+  window.addEventListener('click', ev => {
+    if(isForbid === true){
+      alert('已被禁止');
+      const e = ev || window.event;
+      if(e.stopPropagation){
+        e.stopPropagation();
+        console.log('阻止事件');
+      }else{
+        e.cancleBubble = true;
+      }
+    }
+  }, true);
+
+</script>
+</html>

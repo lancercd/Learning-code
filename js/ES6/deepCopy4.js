@@ -1,3 +1,4 @@
+
 const data = {
     name: 'lancercd',
     age: 20,
@@ -17,30 +18,28 @@ const data = {
     undefined: undefined
 }
 
-
-function deepClone(data) {
+function clone(data) {
   if (typeof data === 'symbol') {
     return Symbol.for(data.description);
-  } else if (data === null) {
-    return null;
-  } else if (typeof data !== 'object') {
+  } else if (typeof data != 'object') {
     return data;
-  } else if (data instanceof Array) {
-    return data.map(item => deepClone(item));
-  } else if (data.constructor == Object) {
-    let obj = {};
+  } else if (data == null) {
+    return null;
+  }
+   else if (data instanceof Array) {
+    return data.map(item => clone(item));
+  } else if (data.constructor === Object) {
+    let res = {};
     for (let key in data) {
-      if (data.hasOwnProperty(key)) {
-        obj[key] = deepClone(data[key]);
-      }
+      res[key] = clone(data[key]);
     }
-    return obj;
+
+    return res;
   } else {
     return new data.constructor(data);
   }
 }
 
-const cloned = deepClone(data);
-cloned2.address.detail.push("*******");
-console.log(data);
-// console.log(cloned.bwh[4].fun());
+const data2 = clone(data);
+
+console.log(data2);

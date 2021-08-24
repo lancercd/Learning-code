@@ -1,0 +1,32 @@
+
+自动部署
+    hook
+    git push  =>master  server  git pull  java -jar xxx.jar
+
+
+DB
+
+
+java
+    接口是否需要登录
+        判断是否包含token token是否过期
+          某些接口需要手机号授权   判断手机号授权
+        
+        判断用户是否被禁用
+    
+
+    访问业务代码
+
+nginx
+
+
+前端
+
+    返回对应的码
+        没有登录  或者  token是否过期  (显示登录框) 
+        是否手机授权    (显示手机授权框)
+        用户是否被禁用    (显示 提示框)
+
+
+    
+    api隔离  将所有的api定义到一个文件

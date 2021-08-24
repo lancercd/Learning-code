@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间戳 节流</title>
+  <style>
+    div{
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+</body>
+<script>
+  const oDiv = document.querySelector('#box');
+
+
+  function throttle(func, interval, immediate){
+    let startTime = Date.now();
+
+    const handler = function (){
+      let now = Date.now();
+      const context = this;
+      const args = arguments;
+      if(immediate === true || (now - startTime) >= interval){
+        immediate = false;
+        func().apply(context, args);
+        startTime = now;
+      }
+    }
+
+
+    return handler;
+  }
+
+  function doSomeThing(){
+    console.log('doSomeThing');
+  }
+  
+  oDiv.onmousemove = throttle(doSomeThing, 1500, true);
+</script>
+</html>

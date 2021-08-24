@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">按钮</button>
+</body>
+<script>
+  const btn = document.querySelector('#btn');
+
+
+  function throttle(func, interval){
+    let timer = null;
+    let flag = false;
+
+    return function () {
+      let context = this;
+      let args = arguments;
+      if(flag === true){
+        func.apply(this, args);
+        flag = false;
+      }
+
+      if(timer == null){
+        timer = setTimeout(() => {flag = true; clearTimeout(timer); timer = null;}, interval);
+      }
+    }
+  }
+
+  const handler = throttle(function() {
+    console.log('执行');
+  }, 1000);
+
+
+  btn.addEventListener('click', () => {
+    console.log('ok');
+    handler();
+  }, false);
+
+</script>
+
+</html>

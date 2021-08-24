@@ -32,3 +32,10 @@ console.log(instanceOf(child, Base));
 console.log(instanceOf(child, Object));
 console.log(instanceOf(child, String));
 console.log(instanceOf("", String));
+
+
+public class Main {
+  public static void main(String[] args){
+    System.out.println("ok");
+  }
+}

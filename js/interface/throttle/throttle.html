@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">按钮</button>
+</body>
+<script>
+
+  //时间戳写法
+  const btn = document.querySelector('#btn');
+
+
+  function throttle(func, interval){
+    let startTime = Date.now();
+
+    
+    return function () {
+      let curTime = Date.now();
+      let args = arguments;
+      let context = this;
+      if(curTime - startTime >= interval){
+
+        func.apply(context, args);
+        startTime = curTime;
+      }
+    }
+  }
+
+
+
+  const fn = throttle( function(msg) {
+    console.log(msg);
+    console.log(this);
+  }, 1500);
+
+  const obj = {
+      name: 'lancercd',
+      age: 10,
+      fn
+    }
+
+  // console.log(obj);
+  btn.addEventListener('click', () => {
+    console.log('ok');
+    obj.fn('aaa');
+  }, false);
+</script>
+
+</html>
