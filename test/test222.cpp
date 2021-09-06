@@ -1,5 +1,6 @@
 #include "iostream"
 #include "algorithm"
+#include "vector"
 // #include "../utils/ListNode/ListNode.h"
 
 using namespace std;
@@ -7,6 +8,51 @@ using namespace std;
 // leetcode
 // 合并两个有序链表
 // https://leetcode-cn.com/problems/merge-two-sorted-lists/
+class ListNode {
+ public:
+    int val;
+    ListNode *next;
+
+    ListNode();
+    ListNode(int x);
+    ListNode(int x, ListNode *next);
+
+    /**
+     * 构建链表
+     * @param arr target数组
+     * @param len 数组长度
+     * @return ListNode*
+     */
+    static ListNode *build(const int arr[], int len);
+    /**
+     * 构建链表
+     * @param arr target数组
+     * @return ListNode*
+     */
+    static ListNode *build(std::vector<int> &arr);
+};
+
+ListNode::ListNode() : val(0), next(nullptr) {}
+ListNode::ListNode(int x) : val(x), next(nullptr) {}
+ListNode::ListNode(int x, ListNode *next) : val(x), next(next) {}
+
+ListNode *ListNode::build(const int arr[], int len) {
+    ListNode *h = new ListNode(), *cur = h;
+    for (int i = 0; i < len; ++i) {
+        cur->next = new ListNode(arr[i]);
+        cur = cur->next;
+    }
+    return h->next;
+}
+ListNode *ListNode::build(std::vector<int> &arr) {
+    ListNode *h = new ListNode(), *cur = h;
+    unsigned int len = arr.size();
+    for (unsigned int i = 0; i < len; ++i) {
+        cur->next = new ListNode(arr[i]);
+        cur = cur->next;
+    }
+    return h->next;
+}
 
 class Solution {
  public:
